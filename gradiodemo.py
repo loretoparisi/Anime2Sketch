@@ -14,7 +14,7 @@ torch.hub.download_url_to_file('https://cdn.pixabay.com/photo/2020/10/02/13/49/b
 torchtext.utils.download_from_url("https://drive.google.com/uc?id=1RILKwUdjjBBngB17JHwhZNBEaW4Mr-Ml", root="./weights/")
 gpu_ids=[]
 model = create_model(gpu_ids)
-model.eval()
+# model.eval()
 
 def sketch2anime(img, load_size=512):
     img, aus_resize = read_img_path(img.name, load_size)
