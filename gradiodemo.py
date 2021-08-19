@@ -40,4 +40,6 @@ gr.Interface(
         ["test_samples/madoka.jpg"],
         ["building.jpg"],
         ["wave.jpg"]
-    ]).launch(debug=True)
+    ],
+    enable_queue=True
+    ).launch(debug=True)
