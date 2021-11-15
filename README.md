@@ -48,7 +48,7 @@ python3 test.py --dataroot test_samples/madoka.jpg --load_size 512 --output_dir 
 ```
 
 ## Docker
-Run within a Docker container. Optionally add a `-d` option to the `docker run` command below to run as a daemon.
+Run Gradioapp within a Docker container. Optionally add a `-d` option to the `docker run` command below to run as a daemon. Default server port to 9080.
 
 ### Build Docker image
 ```
@@ -56,7 +56,7 @@ docker build -f Dockerfile -t anime2sketch .
 ```
 ### Run Docker (cpu)
 ```
-docker run -p 8080:8080 -v $(pwd):/app --rm anime2sketch python3 gradiodemo.py
+docker run -p 9080:9080 -v $(pwd):/app --rm anime2sketch python3 gradiodemo.py
 ```
 
 ### Run Docker (gpu)
