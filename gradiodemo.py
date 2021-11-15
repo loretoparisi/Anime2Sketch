@@ -41,5 +41,7 @@ gr.Interface(
         ["building.jpg"],
         ["wave.jpg"]
     ],
-    enable_queue=True
+    enable_queue=True,
+    server_name="0.0.0.0",
+    server_port=9080
     ).launch(debug=True)

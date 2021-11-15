@@ -47,6 +47,24 @@ Run our example:
 python3 test.py --dataroot test_samples/madoka.jpg --load_size 512 --output_dir results/
 ```
 
+## Docker
+Run within a Docker container. Optionally add a `-d` option to the `docker run` command below to run as a daemon.
+
+### Build Docker image
+```
+docker build -f Dockerfile -t anime2sketch .
+```
+### Run Docker (cpu)
+```
+docker run -p 8080:8080 -v $(pwd):/app --rm anime2sketch python3 gradiodemo.py
+```
+
+### Run Docker (gpu)
+```
+docker run --gpus all -p 9080:9080 -v $(pwd):/app --rm anime2sketch python3 gradiodemo.py
+```
+
+
 ### Train
 This project is a sub-branch of [AODA](https://github.com/Mukosame/AODA). Please check it for the training instructions.
 
