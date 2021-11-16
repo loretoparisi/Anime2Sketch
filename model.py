@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn 
 import functools
 
-
 class UnetGenerator(nn.Module):
     """Create a Unet-based generator"""
 
@@ -102,13 +101,13 @@ class UnetSkipConnectionBlock(nn.Module):
             return torch.cat([x, self.model(x)], 1)
 
 
-def create_model(gpu_ids=[]):
+def create_model(model_path,gpu_ids=[]):
     """Create a model for anime2sketch
     hardcoding the options for simplicity
     """
     norm_layer = functools.partial(nn.InstanceNorm2d, affine=False, track_running_stats=False)
     net = UnetGenerator(3, 1, 8, 64, norm_layer=norm_layer, use_dropout=False)
-    ckpt = torch.load('weights/netG.pth')
+    ckpt = torch.load(model_path)
     for key in list(ckpt.keys()):
         if 'module.' in key:
             ckpt[key.replace('module.', '')] = ckpt[key]

@@ -31,7 +31,7 @@ Anime2Sketch is a sketch extractor that works well on illustration, anime art, a
 Install the required packages: ```pip install -r requirements.txt```
 
 ### Download Pretrained Weights
-Please download the weights from [GoogleDrive](https://drive.google.com/drive/folders/1Srf-WYUixK0wiUddc9y3pNKHHno5PN6R?usp=sharing), and put it into the [weights/](weights/) folder.
+Please download the weights from [GoogleDrive](https://drive.google.com/drive/folders/1Srf-WYUixK0wiUddc9y3pNKHHno5PN6R?usp=sharing), and put it into the [weights/hub](weights/hub) folder.
 
 ### Test
 ```Shell
@@ -48,7 +48,7 @@ python3 test.py --dataroot test_samples/madoka.jpg --load_size 512 --output_dir 
 ```
 
 ## Docker
-Run Gradioapp within a Docker container. Optionally add a `-d` option to the `docker run` command below to run as a daemon. Default server port to 9080.
+Run Gradioapp within a Docker container. Set the `cache_dir` for Pytorch additional models location path. Optionally add a `-d` option to the `docker run` command below to run as a daemon. Default server port to 9080.
 
 ### Build Docker image
 ```
@@ -56,12 +56,12 @@ docker build -f Dockerfile -t anime2sketch .
 ```
 ### Run Docker (cpu)
 ```
-docker run -p 9080:9080 -v $(pwd):/app --rm anime2sketch python3 gradiodemo.py
+docker run -p 9080:9080 -e cache_dir=/app/weights -v $(pwd)/weights:/app/weights -v $(pwd):/app --rm anime2sketch python3 gradiodemo.py
 ```
 
 ### Run Docker (gpu)
 ```
-docker run --gpus all -p 9080:9080 -v $(pwd):/app --rm anime2sketch python3 gradiodemo.py
+docker run --gpus all -p 9080:9080 -e cache_dir=/app/weights -v $(pwd)/weights:/app/weights -v $(pwd):/app --rm anime2sketch python3 gradiodemo.py
 ```
 
 

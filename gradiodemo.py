@@ -7,13 +7,21 @@ import gradio as gr
 import torchtext
 from PIL import Image
 import torch
+from torch.hub import  get_dir
+
+if os.environ["cache_dir"]:
+    os.environ["TORCH_HOME"] = os.environ["cache_dir"]
+
+hub_dir = get_dir()
+if not os.path.isdir(hub_dir):
+    os.makedirs(hub_dir)
 
 torch.hub.download_url_to_file('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tsunami_by_hokusai_19th_century.jpg/1920px-Tsunami_by_hokusai_19th_century.jpg', 'wave.jpg')
 torch.hub.download_url_to_file('https://cdn.pixabay.com/photo/2020/10/02/13/49/bridge-5621201_1280.jpg', 'building.jpg')
+torchtext.utils.download_from_url("https://drive.google.com/uc?id=1RILKwUdjjBBngB17JHwhZNBEaW4Mr-Ml", os.path.join(hub_dir,'netG.pth'))
 
-torchtext.utils.download_from_url("https://drive.google.com/uc?id=1RILKwUdjjBBngB17JHwhZNBEaW4Mr-Ml", root="./weights/")
 gpu_ids=[]
-model = create_model(gpu_ids)
+model = create_model(os.path.join(hub_dir,'netG.pth'), gpu_ids)
 # model.eval()
 
 def sketch2anime(img, load_size=512):
